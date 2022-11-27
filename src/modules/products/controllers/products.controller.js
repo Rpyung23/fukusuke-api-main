@@ -9,7 +9,6 @@ const registerProductsController = (router) => {
     productsService.findAll().then((product) => res.json(product));
   });
 
-
   router.get('/product/:id', (req, res) => {
     productsService
       .update(req.params.id, req.body)

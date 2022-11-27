@@ -33,6 +33,7 @@ class ClientsModel
                 datos:datos
             }
         }catch (e) {
+            console.log(e)
             return {
                 error:e.toString(),
                 datos:null

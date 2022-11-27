@@ -14,7 +14,8 @@ app.post("/PagoPaypal",isOkUserJWT,async function (req,res)
 
     var permisos = req.body.data
     console.log(permisos)
-    console.log("-----------------------")
+    console.log(amount)
+    console.log(items)
 
     if(permisos.rol == getTipoRoles().cliente)
     {
@@ -76,6 +77,37 @@ app.post("/PagoPaypal",isOkUserJWT,async function (req,res)
 
 })
 
+app.post("/registerPagoPaypal",isOkUserJWT,async function (req,res){
+    var permisos = req.body.data
+    console.log(req.body.data.idUser)
+    if(permisos.rol == getTipoRoles().cliente)
+    {
+        try {
+
+            var codeP = oP.registroClientsModel({
+                idPaypal: req.body.idPaypal,
+                total: req.body.total,
+                _idCliente: req.body.data.idUser
+            })
+
+            res.status(200).json({
+                status_code : 200
+            })
+
+        }catch (e) {
+            res.status(200).json({
+                status_code : 400
+            })
+        }
+    }else{
+        res.status(403)
+            .json({
+                idPaypal: null,
+                transactions:null,
+                msm:'ROL NO PERMITIDO'
+            })
+    }
+})
 
 app.post("/readComprasRealizadasPaypal",isOkUserJWT,async function (req,res)
 {
