@@ -49,7 +49,8 @@ app.post("/PagoPaypal",isOkUserJWT,async function (req,res)
             var codeP = oP.registroClientsModel({
                 idPaypal: payment.id,
                 total: payment.transactions[0].amount.total,
-                _idCliente: req.body.data.idUser
+                _idCliente: req.body.data.idUser,
+                detalleCompra:req.body.detalleCompra
             })
 
             res.status(200).json({
@@ -87,7 +88,8 @@ app.post("/registerPagoPaypal",isOkUserJWT,async function (req,res){
             var codeP = oP.registroClientsModel({
                 idPaypal: req.body.idPaypal,
                 total: req.body.total,
-                _idCliente: req.body.data.idUser
+                _idCliente: req.body.data.idUser,
+                detalleCompra:req.body.detalleCompra
             })
 
             res.status(200).json({

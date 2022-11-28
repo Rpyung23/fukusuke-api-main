@@ -14,6 +14,7 @@ class PaypalModel
             oS._idCliente = mongoose.Types.ObjectId(obj._idCliente);
             oS.total = obj.total
             oS.date_Compra =  Date.now()
+            oS.detalleCompra = obj.detalleCompra
             await oS.save()
             return 200
 
